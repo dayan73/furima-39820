@@ -21,6 +21,8 @@ itemsテーブル
 | price              | text      | NOT NULL                  |
 | states             | text      | NOT NULL                  |
 
+-	アソシエーション: has_one :purchase
+
 
 purchasesテーブル
 
@@ -30,3 +32,5 @@ purchasesテーブル
 | users_id           | refarences| NOT NULL foreign_key: true|
 | item_id            | refarences| NOT NULL foreign_key: true|
 
+- belongs_to :user 
+- belongs_to :item
