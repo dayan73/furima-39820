@@ -6,28 +6,38 @@
 | ------------------ | ----------| --------------------------|
 | nickname           | text      | NOT NULL                  |
 | email              | string    | NOT NULL,unique: true     |
-| password           | text      | NOT NULL                  |
+| encrypted_password | string    | NOT NULL                  |
 | last_name          | text      | NOT NULL                  |
 | first_name         | text      | NOT NULL                  |
 | phonetic_last name | text      | NOT NULL                  |
 | phonetic_first name| text      | NOT NULL                  |
-| birthday           | string    | NOT NULL,unique: true     |
+| birthday           | date      | NOT NULL,unique: true     |
 
 
 ## itemsテーブル
 
 | Column             | Type      | Options                   |
 | ------------------ | ----------| --------------------------|
-| trade name         | text      | NOT NULL                  |
+| trade name         | string    | NOT NULL                  |
 | description        | text      | NOT NULL                  |
 | price              | string    | NOT NULL                  |
-| states             | text      | NOT NULL                  |
-| postage            | string    | NOT NULL                  |
-| region             | text      | NOT NULL                  |
-| days               | string    | NOT NULL                  |
-| category           | text      | NOT NULL                  |
-| foreign_key        | references| NOT NULL                  |
+| states_id          | integer   | NOT NULL                  |
+| postage_id         | integer   | NOT NULL                  |
+| region_id          | integer   | NOT NULL                  |
+| days_id            | integer   | NOT NULL                  |
+| category           | integer   | NOT NULL                  |
+| foreign_key        | references| null: false, foreign_key: true|
 
--	アソシエーション: has_one :purchase
+-	has_one :purchase
 
 
+## purchasesテーブル
+
+| Column             | Type      | Options                   |
+| ------------------ | ----------| ------------------------- |
+| id                 | text      | NOT NULL                  |
+| user_id            | refarences| NOT NULL foreign_key: true|
+| item_id            | refarences| NOT NULL foreign_key: true|
+
+- belongs_to :user 
+- belongs_to :item
