@@ -4,29 +4,32 @@
 
 | Column             | Type      | Options                   |
 | ------------------ | ----------| --------------------------|
-| nickname           | text      | NOT NULL                  |
+| nickname           | string    | NOT NULL                  |
 | email              | string    | NOT NULL,unique: true     |
 | encrypted_password | string    | NOT NULL                  |
-| last_name          | text      | NOT NULL                  |
-| first_name         | text      | NOT NULL                  |
-| phonetic_last name | text      | NOT NULL                  |
-| phonetic_first name| text      | NOT NULL                  |
+| last_name          | string    | NOT NULL                  |
+| first_name         | string    | NOT NULL                  |
+| phonetic_last_name | string    | NOT NULL                  |
+| phonetic_first_name| string    | NOT NULL                  |
 | birthday           | date      | NOT NULL,unique: true     |
+
+- has_one :purchase
 
 
 ## itemsテーブル
 
 | Column             | Type      | Options                   |
 | ------------------ | ----------| --------------------------|
-| trade name         | string    | NOT NULL                  |
+| id                 | integer   | NOT NULL, primary key     |
+| trade_name         | string    | NOT NULL                  |
 | description        | text      | NOT NULL                  |
 | price              | string    | NOT NULL                  |
-| states_id          | integer   | NOT NULL                  |
+| state_id           | integer   | NOT NULL                  |
 | postage_id         | integer   | NOT NULL                  |
 | region_id          | integer   | NOT NULL                  |
-| days_id            | integer   | NOT NULL                  |
+| day_id             | integer   | NOT NULL                  |
 | category           | integer   | NOT NULL                  |
-| foreign_key        | references| null: false, foreign_key: true|
+| purchase_id        | integer   | foreign key               |
 
 -	has_one :purchase
 
@@ -35,9 +38,24 @@
 
 | Column             | Type      | Options                   |
 | ------------------ | ----------| ------------------------- |
-| id                 | text      | NOT NULL                  |
-| user_id            | refarences| NOT NULL foreign_key: true|
-| item_id            | refarences| NOT NULL foreign_key: true|
+| id                 | integer   | NOT NULL, primary key     |
+| user               | references| NOT NULL foreign_key      |
+| item               | references| NOT NULL foreign_key      |
 
 - belongs_to :user 
 - belongs_to :item
+
+
+## addressesテーブル
+
+| Column             | Type      | Options                   |
+| ------------------ | ----------| ------------------------- |
+| id                 | integer   | NOT NULL, primary key     |
+| zip_code           | integer   | NOT NULL                  |
+| city               | string    | NOT NULL                  |
+| house_number       | integer   | NOT NULL                  |
+| building           | integer   | NOT NULL                  |
+| phone_number       | integer   | NOT NULL                  |
+| purchase_id        | integer   | NOT NULL, foreign_key     |
+
+- belongs_to :purchases
