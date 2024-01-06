@@ -14,7 +14,7 @@
 | birthday           | date      | NOT NULL,unique: true     |
 
 - has_one :purchase
-
+- belongs_to :item
 
 ## itemsテーブル
 
@@ -23,14 +23,15 @@
 | id                 | integer   | NOT NULL, primary key     |
 | trade_name         | string    | NOT NULL                  |
 | description        | text      | NOT NULL                  |
-| price              | string    | NOT NULL                  |
+| price              | integer   | NOT NULL                  |
 | state_id           | integer   | NOT NULL                  |
 | postage_id         | integer   | NOT NULL                  |
 | region_id          | integer   | NOT NULL                  |
 | day_id             | integer   | NOT NULL                  |
-| category           | integer   | NOT NULL                  |
-| purchase_id        | integer   | foreign key               |
+| category_id        | integer   | NOT NULL                  |
+| user_id            | integer   | NOT NULL, foreign key     |
 
+-	has_one :user
 -	has_one :purchase
 
 
@@ -44,18 +45,19 @@
 
 - belongs_to :user 
 - belongs_to :item
+- belongs_to :address
 
 
-## addressesテーブル
+## addressテーブル
 
 | Column             | Type      | Options                   |
 | ------------------ | ----------| ------------------------- |
 | id                 | integer   | NOT NULL, primary key     |
-| zip_code           | integer   | NOT NULL                  |
+| zip_code           | string    | NOT NULL                  |
 | city               | string    | NOT NULL                  |
 | house_number       | integer   | NOT NULL                  |
-| building           | integer   | NOT NULL                  |
-| phone_number       | integer   | NOT NULL                  |
-| purchase_id        | integer   | NOT NULL, foreign_key     |
+| building           | string    |                           |
+| phone_number       | string    | NOT NULL                  |
+| purchase           | references| NOT NULL, foreign_key     |
 
 - belongs_to :purchases
