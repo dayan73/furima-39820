@@ -13,8 +13,8 @@
 | phonetic_first_name| string    | NOT NULL                  |
 | birthday           | date      | NOT NULL,unique: true     |
 
-- has_one :purchase
-- belongs_to :item
+- has_many :purchase
+- has_many :item
 
 ## itemsテーブル
 
@@ -29,9 +29,9 @@
 | region_id          | integer   | NOT NULL                  |
 | day_id             | integer   | NOT NULL                  |
 | category_id        | integer   | NOT NULL                  |
-| user_id            | integer   | NOT NULL, foreign key     |
+| user               | references| NOT NULL, foreign key     |
 
--	has_one :user
+-	belongs_to :user
 -	has_one :purchase
 
 
@@ -54,10 +54,11 @@
 | ------------------ | ----------| ------------------------- |
 | id                 | integer   | NOT NULL, primary key     |
 | zip_code           | string    | NOT NULL                  |
+| region_id          | integer   | NOT NULL                  |
 | city               | string    | NOT NULL                  |
 | house_number       | integer   | NOT NULL                  |
 | building           | string    |                           |
 | phone_number       | string    | NOT NULL                  |
 | purchase           | references| NOT NULL, foreign_key     |
 
-- belongs_to :purchases
+- belong_to :purchases
