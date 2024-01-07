@@ -45,7 +45,7 @@
 
 - belongs_to :user 
 - belongs_to :item
-- belongs_to :address
+-	has_one :address
 
 
 ## addressテーブル
@@ -61,4 +61,4 @@
 | phone_number       | string    | NOT NULL                  |
 | purchase           | references| NOT NULL, foreign_key     |
 
-- belong_to :purchases
+- belongs_to :purchase
