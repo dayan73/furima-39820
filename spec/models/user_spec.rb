@@ -2,6 +2,16 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'ユーザー新規登録' do
+    before do
+      @user = FactoryBot.build(:user)
+    end
+
+    it 'ニックネームが空では登録できない' do
+      user = FactoryBot.build(:user, nickname: nil)
+      user.valid?
+      expect(user.errors.full_messages).to include("Nickname can't be blank")
+    end   
+        
     it 'emailが空では登録できない' do
       user = FactoryBot.build(:user)  # Userのインスタンス生成
       user.email = ''  # emailの値を空にする
@@ -39,6 +49,36 @@ RSpec.describe User, type: :model do
       user = FactoryBot.build(:user, password: 'password', password_confirmation: 'password123')
       user.valid?
       expect(user.errors.full_messages).to include("Password confirmation doesn't match Password")
+    end
+
+    it '姓が空では登録できない' do
+      user = FactoryBot.build(:user, last_name: nil)
+      user.valid?
+      expect(user.errors.full_messages).to include("Last name can't be blank")
+    end
+
+    it '名が空では登録できない' do
+      user = FactoryBot.build(:user, first_name: nil)
+      user.valid?
+      expect(user.errors.full_messages).to include("First name can't be blank")
+    end
+
+    it '姓（フリガナ）が空では登録できない' do
+      user = FactoryBot.build(:user, phonetic_last_name: nil)
+      user.valid?
+      expect(user.errors.full_messages).to include("Phonetic last name can't be blank")
+    end
+
+    it '名（フリガナ）が空では登録できない' do
+      user = FactoryBot.build(:user, phonetic_first_name: nil)
+      user.valid?
+      expect(user.errors.full_messages).to include("Phonetic first name can't be blank")
+    end
+
+    it '誕生日が空では登録できない' do
+      user = FactoryBot.build(:user, birthday: nil)
+      user.valid?
+      expect(user.errors.full_messages).to include("Birthday can't be blank")
     end
   end
 end
