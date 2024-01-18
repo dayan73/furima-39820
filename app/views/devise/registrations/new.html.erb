@@ -11,17 +11,9 @@
 <% if f.object.errors.any? %>
   <%# render 'shared/error_messages', object: f.object %>
  <% end %>
-<% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@user.errors.count, "error") %>が発生しました:</h2>
 
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li style="color: red;"><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%# エラーメッセージの表示 %>
+<%= render 'shared/error_messages', object: f.object %>
 
   <div class="form-group">
     <div class='form-text-wrap'>

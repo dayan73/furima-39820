@@ -80,10 +80,20 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
       
+      it '姓が空では登録できない' do
+        @user.last_name = ''
+        expect(@user).to_not be_valid
+      end
+      
       it '姓に半角文字が含まれている場合は登録できない' do
         @user.last_name = "Smith"
         @user.valid?
         expect(@user.errors.full_messages).to include("Last name is invalid")
+      end
+      
+      it '名が空では登録できない' do
+        @user.first_name = ''
+        expect(@user).to_not be_valid
       end
       
       it '名に半角文字が含まれている場合は登録できない' do
@@ -92,10 +102,20 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include("First name is invalid")
       end
       
+      it '姓（フリガナ）が空では登録できない' do
+        @user.phonetic_last_name = ''
+        expect(@user).to_not be_valid
+      end
+      
       it '姓（フリガナ）にひらがなが含まれている場合は登録できない' do
         @user.phonetic_last_name = "やまだ"
         @user.valid?
         expect(@user.errors.full_messages).to include("Phonetic last name is invalid")
+      end
+      
+      it '名（フリガナ）が空では登録できない' do
+        @user.phonetic_first_name = ''
+        expect(@user).to_not be_valid
       end
       
       it '名（フリガナ）にひらがなが含まれている場合は登録できない' do
@@ -111,7 +131,7 @@ RSpec.describe User, type: :model do
       end
       
       it '名（フリガナ）に漢字が含まれている場合は登録できない' do
-        @user.phonetic_first_name = "太郎"
+        @user.phonetic_last_name = "太郎"
         @user.valid?
         expect(@user.errors.full_messages).to include("Phonetic first name is invalid")
       end
