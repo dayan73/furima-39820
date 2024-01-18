@@ -81,45 +81,45 @@ RSpec.describe User, type: :model do
       end
       
       it '姓に半角文字が含まれている場合は登録できない' do
-        user = FactoryBot.build(:user, last_name: "Smith")
-        user.valid?
-        expect(user.errors.full_messages).to include("Last name is invalid")
+        @user.last_name = "Smith"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Last name is invalid")
       end
       
       it '名に半角文字が含まれている場合は登録できない' do
-        user = FactoryBot.build(:user, first_name: "John")
-        user.valid?
-        expect(user.errors.full_messages).to include("First name is invalid")
+        @user.first_name = "John"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First name is invalid")
       end
       
       it '姓（フリガナ）にひらがなが含まれている場合は登録できない' do
-        user = FactoryBot.build(:user, phonetic_last_name: "やまだ")
-        user.valid?
-        expect(user.errors.full_messages).to include("Phonetic last name is invalid")
+        @user.phonetic_last_name = "やまだ"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Phonetic last name is invalid")
       end
       
       it '名（フリガナ）にひらがなが含まれている場合は登録できない' do
-        user = FactoryBot.build(:user, phonetic_first_name: "たろう")
-        user.valid?
-        expect(user.errors.full_messages).to include("Phonetic first name is invalid")
+        @user.phonetic_first_name = "たろう"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Phonetic first name is invalid")
       end
       
       it '姓（フリガナ）に漢字が含まれている場合は登録できない' do
-        user = FactoryBot.build(:user, phonetic_last_name: "山田")
-        user.valid?
-        expect(user.errors.full_messages).to include("Phonetic last name is invalid")
+        @user.phonetic_last_name = "山田"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Phonetic last name is invalid")
       end
       
       it '名（フリガナ）に漢字が含まれている場合は登録できない' do
-        user = FactoryBot.build(:user, phonetic_first_name: "太郎")
-        user.valid?
-        expect(user.errors.full_messages).to include("Phonetic first name is invalid")
+        @user.phonetic_first_name = "太郎"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Phonetic first name is invalid")
       end
       
       it '誕生日が空では登録できない' do
-        user = FactoryBot.build(:user, birthday: nil)
-        user.valid?
-        expect(user.errors.full_messages).to include("Birthday can't be blank")
+        @user.birthday = nil
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Birthday can't be blank")
       end
     end
   end
