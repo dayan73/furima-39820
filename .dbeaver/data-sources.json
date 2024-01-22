@@ -1,7 +1,7 @@
 {
 	"folders": {},
 	"connections": {
-		"mysql8-18d26ecb9de-5fc645348dc0c80d": {
+		"mysql8-18ce85d70a0-76e00ee18baaf17f": {
 			"provider": "mysql",
 			"driver": "mysql8",
 			"name": "localhost",
