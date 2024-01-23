@@ -27,7 +27,7 @@
 | state_id           | integer   | NOT NULL                  |
 | postage_id         | integer   | NOT NULL                  |
 | region_id          | integer   | NOT NULL                  |
-| day_id             | integer   | NOT NULL                  |
+| transit_time_id    | integer   | NOT NULL                  |
 | category_id        | integer   | NOT NULL                  |
 | user               | references| NOT NULL, foreign key     |
 
