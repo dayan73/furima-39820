@@ -25,7 +25,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name, :description, :price, :image, ...) # 必要なパラメータを追加してください
+    params.require(:item).permit(:trade_name, :description, :price, :state_id, :postage_id, :region_id, :transit_time_id, :category_id, :user) 
   end
 
 

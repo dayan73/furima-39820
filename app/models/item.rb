@@ -1,26 +1,29 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to : category.rb
-  belongs_to : state.rb
-  belongs_to : postage.rb
-  belongs_to : region.rb
-  belongs_to : transit_time.rb
+  belongs_to :category
+  belongs_to :state
+  belongs_to :postage
+  belongs_to :region
+  belongs_to :transit_time
 
   validates :image, presence: true
-  validates :item, presence: true
   validates :description, presence: true
   validates :category_id, presence: true
+  validates :category_id, numericality: { other_than: 1 } 
+  validates :trade_name, presence: true
   validates :state_id, presence: true
+  validates :state_id, numericality: { other_than: 1 }
   validates :postage_id, presence: true
+  validates :postage_id, numericality: { other_than: 1 }
   validates :region_id, presence: true
+  validates :region_id, numericality: { other_than: 1 }
   validates :transit_time_id, presence: true
+  validates :transit_time_id, numericality: { other_than: 1 }
   validates :price, presence: true, numericality: { greater_than: 0 }
   validate :validate_price_range
   validate :validate_price_format
 
-  extend ActiveHash::Associations::ActiveRecordExtensions
-  belongs_to_active_hash :shipping_area
-
+    
   def validate_price_range
     unless price.nil?
       if price < 300 || price > 9_999_999
@@ -44,4 +47,7 @@ class Item < ApplicationRecord
   def sales_profit
     price - sales_fee
   end
+
+  belongs_to :user
+  has_one_attached :image
 end
