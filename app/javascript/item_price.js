@@ -16,13 +16,7 @@ const item_price = () => {
     addTaxDom.innerHTML = `${fee}円`;
     profitDom.innerHTML = `${profit}円`;
   });
-
-  console.log(priceInput);
-  
-  console.log("OK");
 };
-
-
 
 window.addEventListener('turbo:load',item_price);
 window.addEventListener('turbo:render',item_price);

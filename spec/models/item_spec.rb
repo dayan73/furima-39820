@@ -14,7 +14,7 @@ RSpec.describe Item, type: :model do
     end
     
     context '異常な場合' do
-      it 'が1枚ないと登録できない' do
+      it '画像が1枚ないと登録できない' do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
@@ -98,11 +98,13 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
 
-      it '価格は、¥300~¥9,999,999の間のみ保存可能であること' do
-        @item.price = 100
+      it '価格は、¥300未満では保存できないこと' do
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price は¥300から¥9,999,999の範囲で入力してください")
+      end
       
+      it '価格は、¥10,000,000以上では保存できないこと' do
         @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price は¥300から¥9,999,999の範囲で入力してください")
@@ -117,6 +119,12 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not a number")
       end 
+    
+      it 'userが紐づいていないと出品できないこと' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end    
     end
   end         
 end
