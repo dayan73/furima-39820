@@ -11,4 +11,8 @@ class User < ApplicationRecord
   validates :phonetic_last_name, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: "は全角カタカナで入力してください" }
   validates :phonetic_first_name, presence: true, format: { with: /\A[ァ-ヶー－]+\z/, message: "は全角カタカナで入力してください" }
   validates :birthday, presence: true
+
+  has_many :items
 end
+
+
