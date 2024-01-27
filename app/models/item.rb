@@ -19,7 +19,7 @@ class Item < ApplicationRecord
   validates :region_id, numericality: { other_than: 1 }
   validates :transit_time_id, presence: true
   validates :transit_time_id, numericality: { other_than: 1 }
-  validates :price, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  validates :price, presence: true, numericality: { only_integer: true}
   validate :validate_price_range
   validate :validate_price_format
 
