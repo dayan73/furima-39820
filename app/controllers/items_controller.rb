@@ -25,13 +25,13 @@ class ItemsController < ApplicationController
   
   end
 
-  def edit
-    @item = Item.edit
-  end
+  #def edit
+    #@item = Item.edit
+  #end
 
-  def delite
-    @item = Item.delite
-  end
+  #def delite
+    #@item = Item.delite
+  #end
 
 
  private
