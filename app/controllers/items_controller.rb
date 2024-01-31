@@ -9,6 +9,10 @@ class ItemsController < ApplicationController
     @item = Item.new
   end
  
+  def show
+    @item = Item.find(params[:id])
+  end
+
   def create
     @item = Item.new(item_params) 
   
@@ -17,14 +21,23 @@ class ItemsController < ApplicationController
 
     else
       render :new, status: :unprocessable_entity
-    end
+    end    
+  
   end
+
+  #def edit
+    #@item = Item.edit
+  #end
+
+  #def delite
+    #@item = Item.delite
+  #end
+
 
  private
 
  def item_params
   params.require(:item).permit(:image, :trade_name, :description, :price, :state_id, :postage_id, :region_id, :transit_time_id, :category_id).merge(user_id: current_user.id)
 end
-
 
 end
