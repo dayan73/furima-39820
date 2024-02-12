@@ -11,18 +11,9 @@ class OrderForm
 
   end
  
-  #def initialize(attributes = {}, user: nil, item: nil)
-   # @user = user
-   # @item = item
-    #super(attributes)
- # end
-
-
-
   def save
     purchase = Purchase.create(item_id: item_id, user_id: user_id) 
     Address.create(zip_code: zip_code, region_id: region_id, city: city, house_number: house_number, building: building,  phone_number: phone_number, purchase_id: purchase.id) 
   end
-
   
-  end
+end
