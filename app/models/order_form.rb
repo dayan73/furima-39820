@@ -8,9 +8,12 @@ class OrderForm
     validates :city
     validates :house_number
     validates :phone_number
-
+    validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid' }
+    validates :user_id
+    validates :item_id
   end
  
+
   def save
     purchase = Purchase.create(item_id: item_id, user_id: user_id) 
     Address.create(zip_code: zip_code, region_id: region_id, city: city, house_number: house_number, building: building,  phone_number: phone_number, purchase_id: purchase.id) 

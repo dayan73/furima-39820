@@ -89,5 +89,7 @@ gem 'active_hash'
 gem 'devise'
 
 group :development, :test do
-  gem 'pry-rails'
+  
+  gem 'factory_bot_rails'
+
 end
