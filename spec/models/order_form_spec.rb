@@ -63,8 +63,20 @@ RSpec.describe OrderForm, type: :model do
         expect(@order_form.errors.full_messages).to include("Phone number can't be blank")
       end
   
-      it '電話番号は10桁以上11桁以内の半角数値登録でなければ登録できない' do
-        @order_form.phone_number = "123456"  # 6桁の半角数値でバリデーションエラーが出ることを確認
+      it '電話番号が9桁以下では登録できない' do
+        @order_form.phone_number = "123456789"  # 9桁の半角数値
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it '電話番号が12桁以上では登録できない' do
+        @order_form.phone_number = "123456789012"  # 12桁の半角数値
+        @order_form.valid?
+        expect(@order_form.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it '電話番号に半角数字以外が含まれている場合、登録できない' do
+        @order_form.phone_number = "1234567890a"  # 半角数値と半角英字
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Phone number is invalid")
       end
