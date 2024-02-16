@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :contributor_confirmation, only: [:index, :edit]
+
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @order_form = OrderForm.new
@@ -28,4 +31,10 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order_form).permit(:zip_code, :region_id, :city, :house_number, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
   end
+
+  def contributor_confirmation
+    @item = Item.find(params[:item_id])
+    redirect_to root_path if current_user.id == @item.user_id
+  end
+
 end

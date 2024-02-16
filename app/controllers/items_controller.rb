@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :set_item, except: [:index, :new, :create]
   before_action :authenticate_user!, only: [:new, :edit, :update, :destroy]
-  before_action :contributor_confirmation, only: [:edit, :destroy]
+  before_action :redirect_sold_out, only: [:show]
+  
 
   def index
     @items = Item.order(created_at: :desc)
@@ -25,6 +26,10 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    @item = Item.find(params[:id])
+    if @item.purchase.present?
+      redirect_to root_path
+    end  
   end
 
   def update
@@ -51,7 +56,9 @@ class ItemsController < ApplicationController
                                  :category_id).merge(user_id: current_user.id)
   end
 
-  def contributor_confirmation
-    redirect_to root_path unless current_user == @item.user
+  def redirect_sold_out
+    redirect_to root_path if @item.sold_out?
   end
+
+
 end
