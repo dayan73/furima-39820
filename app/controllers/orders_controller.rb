@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :contributor_confirmation, only: [:index, :edit]
+  before_action :contributor_confirmation, only: [:index]
   before_action :set_item, only: [:index, :create]
 
   def index

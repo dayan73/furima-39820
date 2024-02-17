@@ -12,6 +12,11 @@ RSpec.describe OrderForm, type: :model do
       it 'tokenがあれば商品を購入できる' do
         expect(@order_form).to be_valid
       end
+
+      it '建物名が空でも購入できる' do
+        @order_form.building = nil
+        expect(@order_form).to be_valid
+      end
     end
   
     context '異常な場合' do
@@ -40,7 +45,7 @@ RSpec.describe OrderForm, type: :model do
       end
 
       it '都道府県の情報が空では登録できない' do
-        @order_form.region_id = nil
+        @order_form.region_id = 0
         @order_form.valid?
         expect(@order_form.errors.full_messages).to include("Region can't be blank")
       end
