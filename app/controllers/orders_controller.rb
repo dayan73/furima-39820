@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :contributor_confirmation, only: [:index]
   before_action :set_item, only: [:index, :create]
+  before_action :contributor_confirmation, only: [:index]
 
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
@@ -36,8 +36,7 @@ class OrdersController < ApplicationController
   end
 
   def contributor_confirmation
-    @item = Item.find(params[:item_id])
-    redirect_to root_path if current_user.id == @item.user_id
+    redirect_to root_path if current_user.id == @item.user_id || @item.purchase.present?
   end
 
 end
