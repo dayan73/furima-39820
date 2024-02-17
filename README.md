@@ -39,7 +39,6 @@
 
 | Column             | Type      | Options                   |
 | ------------------ | ----------| ------------------------- |
-| id                 | integer   | NOT NULL, primary key     |
 | user               | references| NOT NULL foreign_key      |
 | item               | references| NOT NULL foreign_key      |
 
@@ -52,7 +51,6 @@
 
 | Column             | Type      | Options                   |
 | ------------------ | ----------| ------------------------- |
-| id                 | integer   | NOT NULL, primary key     |
 | zip_code           | string    | NOT NULL                  |
 | region_id          | integer   | NOT NULL                  |
 | city               | string    | NOT NULL                  |

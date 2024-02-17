@@ -45,9 +45,12 @@ class Item < ApplicationRecord
     price - sales_fee
   end
 
-  def sold_out
+  def sold_out?
+    purchase.present?
   end
 
   belongs_to :user
   has_one_attached :image
+  has_one :purchase
+
 end

@@ -133,7 +133,7 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Phonetic last name is invalid')
       end
-
+ではない
       it '名（フリガナ）に漢字が含まれている場合は登録できない' do
         @user.phonetic_last_name = '太郎'
         @user.valid?
