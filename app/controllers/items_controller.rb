@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    if @item.purchase.present?
+    if @item.purchase.present? || current_user.id != @item.user_id
       redirect_to root_path
     end  
   end
