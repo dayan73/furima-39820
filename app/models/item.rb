@@ -5,6 +5,7 @@ class Item < ApplicationRecord
   belongs_to :postage
   belongs_to :region
   belongs_to :transit_time
+  has_many :likes
 
   validates :image, presence: true
   validates :description, presence: true
@@ -47,6 +48,10 @@ class Item < ApplicationRecord
 
   def sold_out?
     purchase.present?
+  end
+
+  def liked_by?(user)
+    likes.where(user_id: user.id).exists?
   end
 
   belongs_to :user
