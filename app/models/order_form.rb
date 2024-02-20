@@ -7,7 +7,7 @@ class OrderForm
     validates :region_id, presence: true, numericality: { other_than: 0, message: "can't be blank" }
     validates :city
     validates :house_number
-    validates :phone_number, presence: true, format: { with: /\A\d{10,11}\z/, message: 'is invalid' }
+    validates :phone_number, presence: {message: "can't be blank"}, format: { with: /\A\d{10,11}\z/, message: 'is invalid', allow_blank: true }
     validates :user_id
     validates :item_id
     validates :token
