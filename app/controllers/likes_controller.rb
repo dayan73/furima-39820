@@ -2,8 +2,7 @@ class LikesController < ApplicationController
   #before_action :set_item
   
   def create
-    like = current_user.likes.build(item_id: params[:item_id])
-    like.save
+    like = current_user.likes.create(item_id: params[:item_id])
     respond_to do |format|
       format.js
     end
